@@ -29,12 +29,12 @@ yarn add @reduxjs/toolkit react-redux
 
 ### Criar uma Store
 
-Crie um arquivo `store.js` ou `Store/index.js` para isso:
+Crie um arquivo `store.js` ou `Redux/index.js` para isso:
 
 ``` .
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import rootReducer from './reducers'; // Crie os seus reducers em './reducers'
+import rootReducer from "./rootReducer"; // Crie os seus reducers em './reducers'
 
 const store = configureStore({
   reducer: rootReducer,
@@ -55,7 +55,6 @@ export default store;
 <p
 > Reducers são funções que especificam como o estado do aplicativo muda em resposta a uma ação. Você pode criar um ou mais reducers que são combinados no rootReducer, que será utilizado na criação da store. Crie uma pasta reducers na mesma pasta em que criou o arquivo store.js e crie seus reducers lá.
 
-> Exemplo de um reducer básico (counterReducer.js):
 </p>
 
 ### Criar o Reducers
@@ -64,33 +63,30 @@ export default store;
 <p
 >
 
-``` .
-  const initialState = {
-    count: 0,
-  };
+> Criar um arquivo com nome: openModalProdReducer.ts
 
-  const counterReducer = (state = initialState, action) => {
-    switch (action.type) {
-    case 'INCREMENT':
-      return { ...state, count: state.count + 1 };
-    case 'DECREMENT':
-      return { ...state, count: state.count - 1 };
+``` .
+import { AnyAction } from "redux";
+
+const initialStateModal = {
+  open: null,
+};
+
+const openModalProdReducer = (state = initialStateModal, action: AnyAction) => {
+  switch (action.type) {
+    case "OPEN_MODAL":
+      return { ...state, open: action.payload };
+    case "CLOSE_MODAL":
+      return { ...state, open: null };
     default:
       return state;
   }
 };
 
-export default counterReducer;
+export default openModalProdReducer;
 ```
 
 </p>
-
-<!-- <h4
-> Observação </h4>
-
-<p
-> No código acima, estamos utilizando a prop children de forma que o componente ThemeProvider encapsule todos os componentes-filho. Isso significa que os componentes aninhados serão embrulhados pelo ThemeContext.Provider e poderão acessar os dados do Context.
-</p> -->
 
 ## Terceiro passo
 
@@ -99,22 +95,23 @@ export default counterReducer;
 <p
 > Se você tiver vários reducers, precisará combiná-los usando a função combineReducers do Redux. Isso permite que você crie um único rootReducer que será passado à função createStore.
 
-> Exemplo de rootReducer.js:
+> Exemplo de rootReducer.ts:
 </p>
 
 <p
 >
 
 ``` .
-import { combineReducers } from 'redux';
-import counterReducer from './counterReducer';
+import { combineReducers } from "redux";
+import openModalProdReducer from "./OpenModal/OpenModalProduction";
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
+  modal: openModalProdReducer,
   // Adicione outros reducers aqui, se houver
 });
 
 export default rootReducer;
+
 ```
 
 </p>
@@ -132,24 +129,53 @@ export default rootReducer;
 >
 
 ``` .
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import store from './store'; // Importe a store que você criou anteriormente
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+import store from "../src/Redux/store.ts";
+import { Provider } from "react-redux";
+
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
 );
-
 ```
 
 </p>
 
 ## Quinto passo
+
+### Gerar as Actions que serão usadas no Dispatch():
+
+<p
+> A action é um objeto ou uma função que envia uma ação ao reducer, o qual realizará uma alteração no estado global.
+
+> Exemplo de um componente que retorna a lógica do estado, aqui separa estado por estado cada um deve ter o seu:
+
+</p>
+
+<p
+>
+
+``` .
+export const openModal = (payload: any) => {
+  return { type: "OPEN_MODAL", payload };
+};
+
+export const closeModal = () => {
+  return { type: "CLOSE_MODAL" };
+};
+```
+
+</p>
+
+## Sexto passo
 
 ### Utilizar o estado global e despachar ações:
 
@@ -164,24 +190,60 @@ ReactDOM.render(
 >
 
 ``` .
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from "react";
+import { productionImages } from "../../../images/ImagesAndVideos/ImagesAndVideos";
+import "./_production.sass";
+import SummerModal from "../../modais/ModalBeer";
 
-const CounterComponent = () => {
-  const count = useSelector(state => state.counter.count);
+import { useSelector, useDispatch } from "react-redux";
+import { openModal, closeModal } from "../../../Redux/modalActions"; // Importe os criadores de ação corretamente
+
+const Production: React.FC = () => {
+  const modalOpen = useSelector((state: any) => state.modal.open);
   const dispatch = useDispatch();
 
+  const imageClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const { accessKey } = event.currentTarget.dataset;
+    if (accessKey) {
+      dispatch(openModal(accessKey)); // Dispatch da ação 'openModal'
+    }
+  };
+
+  const imagesVerify = productionImages.filter((img) => img.image !== "");
+
+  const handleCloseModal = () => {
+    dispatch(closeModal()); // Dispatch da ação 'closeModal'
+  };
+
   return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
-      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+    <div id="firstDivProduction">
+      {imagesVerify &&
+        imagesVerify.map((img, index) => (
+          <div
+            key={`${img.id}-${index}`}
+            className={`imagemProduction img-${img.id}-${index}`}
+            onClick={imageClick}
+            data-access-key={img.name}
+          >
+            <img
+              className="imgProduction"
+              src={img.image}
+              alt={`Imagem da cerveja ${img.name}`}
+            />
+          </div>
+        ))}
+      {modalOpen && (
+        <SummerModal
+          beer={modalOpen}
+          open={true}
+          handleClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };
 
-export default CounterComponent;
-
+export default Production;
 ```
 
 </p>
