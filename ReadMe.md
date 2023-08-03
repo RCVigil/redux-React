@@ -18,13 +18,13 @@ Redux é uma biblioteca JavaScript de código aberto para gerenciar o estado do 
 #### If you use npm:
 
 ``` .
-npm install redux react-redux
+npm install @reduxjs/toolkit react-redux
 ```
 
 #### Or if you use Yarn:
 
 ``` .
-yarn add redux react-redux
+yarn add @reduxjs/toolkit react-redux
 ```
 
 ### Criar uma Store
@@ -32,12 +32,16 @@ yarn add redux react-redux
 Crie um arquivo `store.js` ou `Store/index.js` para isso:
 
 ``` .
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+
 import rootReducer from './reducers'; // Crie os seus reducers em './reducers'
 
-const store = createStore(rootReducer);
+const store = configureStore({
+  reducer: rootReducer,
+});
 
 export default store;
+
 
 ```
 
