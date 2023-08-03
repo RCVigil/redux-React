@@ -61,6 +61,7 @@ export default store;
 <p
 >
 
+``` .
   const initialState = {
     count: 0,
   };
@@ -77,6 +78,7 @@ export default store;
 };
 
 export default counterReducer;
+```
 
 </p>
 
