@@ -18,13 +18,13 @@ Redux é uma biblioteca JavaScript de código aberto para gerenciar o estado do 
 #### If you use npm:
 
 ``` .
-npm install react-redux
+npm install redux react-redux
 ```
 
 #### Or if you use Yarn:
 
 ``` .
-yarn add react-redux
+yarn add redux react-redux
 ```
 
 ### Criar uma Store
