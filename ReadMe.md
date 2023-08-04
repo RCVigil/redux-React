@@ -1,7 +1,10 @@
 #   REACT
 
 <details>
-<strong>Check List Redux 
+
+<summary
+><strong
+> Check List Redux
 <br
 />
 
