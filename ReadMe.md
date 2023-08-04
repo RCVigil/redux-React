@@ -2,13 +2,13 @@
 
 <details>
 
-<summary
-><strong
+<summary>
+<strong
 > Check List Redux
-<br
-/>
 
 Esta Check List é para auxiliar a instalação correta do Redux.
+
+</summary>
 
 ## Antes de começar:
 `[ ]` Pensar como será o formato de seu estado global.
