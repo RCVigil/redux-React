@@ -1,6 +1,149 @@
 #   REACT
 
 <details>
+<strong>Check List Redux 
+<br
+/>
+
+Esta Check List é para auxiliar a instalação correta do Redux.
+
+## Antes de começar:
+`[ ]` Pensar como será o formato de seu estado global.
+`[ ]` Pensar quais actions serão necessárias em sua aplicação.
+
+<br/>
+
+### Instalação:
+`[ ]` npm install –save redux react-redux;
+`[ ]` npm install –save @redux-devtools/extension
+
+<br/>
+
+### Criar dentro do diretório src:
+`[ ]` Diretório redux.
+
+<br/>
+
+### Criar dentro do diretório redux:
+`[ ]` Diretório actions.
+`[ ]` Diretório reducers.
+`[ ]` Arquivo index.ts.
+
+<br/>
+
+### Criar dentro do diretório actions:
+`[ ]` Arquivo index.ts.
+
+<br/>
+
+### Criar dentro do diretório reducers:
+`[ ]` Arquivo index.ts.
+
+<br/>
+
+### Criar dentro do arquivo redux/index.ts:
+`[ ]` Importar o createStore.
+`[ ]` Configurar o Redux DevTools.
+`[ ]` Importar o rootReducer.
+`[ ]` Criar e exportar a store.
+
+<br/>
+
+### Dentro do arquivo redux/reducers/index.ts:
+`[ ]` Criar estado inicial.
+`[ ]` Criar função reducer com switch retornando apenas a opção default.
+`[ ]` Criar rootReducer usando o combineReducers.
+`[ ]` Exportar rootReducer.
+
+<br/>
+
+### No arquivo ./src/main.tsx:
+`[ ]` Importar a store.
+`[ ]` Importar o Provider para fornecer os estados a todos os componentes encapsulados pelo <App />.
+
+  Exemplo:
+
+  Na importação
+
+  ``` .
+  import { Provider } from 'react-redux';
+  import store from './redux'
+  ```
+
+  <br/>
+
+  No render
+
+  ``` .
+  <Provider store={ store } >
+    <App />
+  </Provider>
+  ```
+
+  <br/>
+
+  ### No arquivo redux/actions/index.ts:
+`[ ]` Criar e exportar os actionTypes.
+Exemplo:
+
+  ACTIONS TYPES
+
+``` .
+  export const ADD_EMAIL = 'ADD_EMAIL';
+```
+
+`[ ]` Criar e export os actions creators necessários.
+Exemplo:
+
+  ACTIONS CREATORS
+
+``` .
+  export const addEmail = (email) => ({
+    type: ADD_EMAIL,
+    email,
+  })
+```
+
+### Nos reducers:
+`[ ]` Criar os casos para cada action criada, retornando o devido estado atualizado.
+
+### Nos componentes que irão ler o estado:
+`[ ]` Importar o hook useSelector da biblioteca react-redux.
+Exemplo:
+
+  No import
+
+``` .
+  import { useSelector } from 'react-redux';
+```
+
+  No componente antes do Render
+
+``` .
+  const rootState = useSelector((state: RootState) => state);
+```
+
+### Nos componentes que modificarão o estado:
+`[ ]` Importar o hook useDispatch da biblioteca react-redux.
+Exemplo:
+
+  No import
+
+``` .
+  import { useDispatch } from 'react-redux';
+```
+
+  No componente antes do Render
+
+``` .
+  const dispatch = useDispatch();
+```
+
+</details>
+
+<br/>
+
+<details>
 
 <summary
 ><strong
