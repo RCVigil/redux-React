@@ -11,60 +11,64 @@ Esta Check List é para auxiliar a instalação correta do Redux.
 </summary>
 
 ## Antes de começar:
-`[ ]` Pensar como será o formato de seu estado global.
-`[ ]` Pensar quais actions serão necessárias em sua aplicação.
+- [ ] Pensar como será o formato de seu estado global.
+- [ ] Pensar quais actions serão necessárias em sua aplicação.
 
 <br/>
 
 ### Instalação:
-`[ ]` npm install –save redux react-redux;
-`[ ]` npm install –save @redux-devtools/extension
+- [ ] npm install –save redux react-redux;
+- [ ] npm install –save @redux-devtools/extension
 
 <br/>
 
 ### Criar dentro do diretório src:
-`[ ]` Diretório redux.
+- [ ] Diretório redux.
 
 <br/>
 
 ### Criar dentro do diretório redux:
-`[ ]` Diretório actions.
-`[ ]` Diretório reducers.
-`[ ]` Arquivo index.ts.
+- [ ] Diretório actions.
+- [ ] Diretório reducers.
+- [ ] Arquivo index.ts.
 
 <br/>
 
 ### Criar dentro do diretório actions:
-`[ ]` Arquivo index.ts.
+- [ ] Arquivo index.ts.
 
 <br/>
 
 ### Criar dentro do diretório reducers:
-`[ ]` Arquivo index.ts.
+- [ ] Arquivo index.ts.
 
 <br/>
 
 ### Criar dentro do arquivo redux/index.ts:
-`[ ]` Importar o createStore.
-`[ ]` Configurar o Redux DevTools.
-`[ ]` Importar o rootReducer.
-`[ ]` Criar e exportar a store.
+- [ ] Importar o createStore.
+- [ ] Configurar o Redux DevTools.
+- [ ] Importar o rootReducer.
+- [ ] Criar e exportar a store.
 
 <br/>
 
 ### Dentro do arquivo redux/reducers/index.ts:
-`[ ]` Criar estado inicial.
-`[ ]` Criar função reducer com switch retornando apenas a opção default.
-`[ ]` Criar rootReducer usando o combineReducers.
-`[ ]` Exportar rootReducer.
+- [ ] Criar estado inicial.
+- [ ] Criar função reducer com switch retornando apenas a opção default.
+- [ ] Criar rootReducer usando o combineReducers.
+- [ ] Exportar rootReducer.
 
 <br/>
 
 ### No arquivo ./src/main.tsx:
-`[ ]` Importar a store.
-`[ ]` Importar o Provider para fornecer os estados a todos os componentes encapsulados pelo <App />.
+- [ ] Importar a store.
+- [ ] Importar o Provider para fornecer os estados a todos os componentes encapsulados pelo <App />.
+
+<br/>
 
   Exemplo:
+
+  <br/>
 
   Na importação
 
@@ -86,8 +90,13 @@ Esta Check List é para auxiliar a instalação correta do Redux.
   <br/>
 
   ### No arquivo redux/actions/index.ts:
-`[ ]` Criar e exportar os actionTypes.
+- [ ] Criar e exportar os actionTypes.
+
+<br/>
+
 Exemplo:
+
+  <br/>
 
   ACTIONS TYPES
 
@@ -95,8 +104,13 @@ Exemplo:
   export const ADD_EMAIL = 'ADD_EMAIL';
 ```
 
-`[ ]` Criar e export os actions creators necessários.
+- [ ] Criar e export os actions creators necessários.
+
+<br/>
+
 Exemplo:
+
+<br/>
 
   ACTIONS CREATORS
 
@@ -108,17 +122,24 @@ Exemplo:
 ```
 
 ### Nos reducers:
-`[ ]` Criar os casos para cada action criada, retornando o devido estado atualizado.
+- [ ] Criar os casos para cada action criada, retornando o devido estado atualizado.
 
 ### Nos componentes que irão ler o estado:
-`[ ]` Importar o hook useSelector da biblioteca react-redux.
+- [ ] Importar o hook useSelector da biblioteca react-redux.
+
+<br/>
+
 Exemplo:
+
+<br/>
 
   No import
 
 ``` .
   import { useSelector } from 'react-redux';
 ```
+
+<br/>
 
   No componente antes do Render
 
@@ -127,14 +148,21 @@ Exemplo:
 ```
 
 ### Nos componentes que modificarão o estado:
-`[ ]` Importar o hook useDispatch da biblioteca react-redux.
+- [ ] Importar o hook useDispatch da biblioteca react-redux.
+
+<br/>
+
 Exemplo:
+
+<br/>
 
   No import
 
 ``` .
   import { useDispatch } from 'react-redux';
 ```
+
+<br/>
 
   No componente antes do Render
 
